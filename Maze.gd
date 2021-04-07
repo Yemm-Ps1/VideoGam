@@ -93,7 +93,6 @@ func make_maze():
 	
 	# Al gore rythm (Recursive backtracker)
 	while unvisited:
-		yield(self, "continue_signal")
 		var neighbors = check_neighbors(current, unvisited) # Gets all unvisited neighbors.
 		if neighbors.size() > 0: # If there is an unvisited neighbour.
 			var next = neighbors[randi() % neighbors.size()] # Randomly choose one of the potential neighbours.
