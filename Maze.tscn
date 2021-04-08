@@ -5,25 +5,19 @@
 [ext_resource path="res://Player.gd" type="Script" id=3]
 [ext_resource path="res://assets/Skull_Walk_All_Frames.png" type="Texture" id=4]
 
-[sub_resource type="CapsuleShape2D" id=1]
-
 [sub_resource type="AtlasTexture" id=2]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 0, 0, 42, 64 )
 
 [sub_resource type="AtlasTexture" id=3]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 42, 0, 42, 64 )
 
 [sub_resource type="AtlasTexture" id=4]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 84, 0, 42, 64 )
 
 [sub_resource type="AtlasTexture" id=5]
-flags = 4
 atlas = ExtResource( 4 )
 region = Rect2( 126, 0, 42, 64 )
 
@@ -34,6 +28,10 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 } ]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 18.085
+height = 20.0056
 
 [node name="Maze" type="Node2D"]
 script = ExtResource( 2 )
@@ -54,10 +52,10 @@ __meta__ = {
 }
 speed = 50
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource( 1 )
-
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
 frames = SubResource( 6 )
-frame = 2
 playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2( 0, 1 )
+shape = SubResource( 1 )
