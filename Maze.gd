@@ -109,7 +109,7 @@ func make_maze():
 		#yield(get_tree(), 'idle_frame')
 		
 		
-		#yield(self, "continue_signal")
+		yield(self, "continue_signal")
 	yield(self, "continue_signal")
 	erase_walls()
 	
