@@ -112,7 +112,6 @@ func make_maze():
 			var dir = next - current # Finds the direction of the selected neighbour.
 			var current_walls = Map.get_cellv(current) - cell_walls[dir] # Makes current_walls equal to the current cell minus the direction AKA the new cell.
 			var next_walls = Map.get_cellv(next) - cell_walls[-dir]
-			mapTree.keys().pop_front({current : current_walls})
 			Map.set_cellv(current, current_walls)
 			Map.set_cellv(next, next_walls)
 			current = next
