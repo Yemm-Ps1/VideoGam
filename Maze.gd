@@ -7,6 +7,19 @@ const W = 8
 
 onready var Map = $TileMap
 
+export var erase_fraction = 1
+
+var tile_size = 64
+var width = 20
+var height = 12
+
+export var map_seed = 420
+export var zoom = 0.1
+export var DEBUG_CLICK = false
+
+
+signal continue_signal
+
 var cell_walls = {
 	Vector2.UP : N, Vector2.RIGHT : E,
 	Vector2.DOWN : S, Vector2.LEFT : W
@@ -14,16 +27,12 @@ var cell_walls = {
 
 
 
-var erase_fraction = 1
 
-var tile_size = 64
-var width = 20
-var height = 12
 
-var map_seed = 0
 
 
 func _ready():
+	
 	$Camera2D.zoom = Vector2(1,1)
 	$Camera2D.position = Map.map_to_world(Vector2(width/2, height/2))
 	#OS.set_window_size(Vector2((width * tile_size), (height * tile_size)))
@@ -34,12 +43,9 @@ func _ready():
 	print("Seed: ", map_seed)
 	tile_size = Map.cell_size
 	make_maze()
-	
-
-export var zoom = 0.1
 
 
-signal continue_signal
+
 
 
 var scroll_dir = {
@@ -48,6 +54,7 @@ var scroll_dir = {
 }
 
 var modifier = 1
+
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_accept"):
@@ -89,10 +96,15 @@ func make_maze():
 			unvisited.append(Vector2(x,y))
 			Map.set_cellv(Vector2(x,y), N|E|S|W) # Makes all the Cells blank, equal to tile 15
 	var current = Vector2.ZERO
+	
 	unvisited.erase(current)
 	
+	var mapTree = {}
 	# Al gore rythm (Recursive backtracker)
 	while unvisited:
+		
+		if(DEBUG_CLICK):
+			yield(self, "continue_signal")
 		var neighbors = check_neighbors(current, unvisited) # Gets all unvisited neighbors.
 		if neighbors.size() > 0: # If there is an unvisited neighbour.
 			var next = neighbors[randi() % neighbors.size()] # Randomly choose one of the potential neighbours.
@@ -100,21 +112,23 @@ func make_maze():
 			var dir = next - current # Finds the direction of the selected neighbour.
 			var current_walls = Map.get_cellv(current) - cell_walls[dir] # Makes current_walls equal to the current cell minus the direction AKA the new cell.
 			var next_walls = Map.get_cellv(next) - cell_walls[-dir]
+			mapTree.keys().pop_front({current : current_walls})
 			Map.set_cellv(current, current_walls)
 			Map.set_cellv(next, next_walls)
 			current = next
 			unvisited.erase(current)
+			#yield(get_tree(), 'idle_frame')
+			
 		elif stack:
 			current = stack.pop_back()
-		#yield(get_tree(), 'idle_frame')
 		
-		
-		yield(self, "continue_signal")
-	yield(self, "continue_signal")
-	erase_walls()
+	print(mapTree)
+	#erase_walls()
 	
 func erase_walls():
 	for i in range(int(width * height * erase_fraction)):
+		if(DEBUG_CLICK):
+			yield(self, "continue_signal")
 		var x = int(rand_range(1, width-1))
 		var y = int(rand_range(1, height-1))
 		var cell = Vector2(x, y)
@@ -126,6 +140,5 @@ func erase_walls():
 			var n_walls = Map.get_cellv(cell + neighbor) - cell_walls[-neighbor]
 			Map.set_cellv(cell, walls)
 			Map.set_cellv(cell + neighbor, n_walls)
-		yield(self, "continue_signal")
 
 
