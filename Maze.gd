@@ -18,6 +18,8 @@ export var zoom = 0.1
 export var DEBUG_CLICK = false
 
 
+
+
 signal continue_signal
 
 var cell_walls = {
@@ -32,7 +34,6 @@ var cell_walls = {
 
 
 func _ready():
-	
 	$Camera2D.zoom = Vector2(1,1)
 	$Camera2D.position = Map.map_to_world(Vector2(width/2, height/2))
 	#OS.set_window_size(Vector2((width * tile_size), (height * tile_size)))

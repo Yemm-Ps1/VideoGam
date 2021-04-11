@@ -3,10 +3,10 @@
 [ext_resource path="res://addons/gut/plugin_control.gd" type="Script" id=1]
 
 [node name="TreeBuilder" type="Control"]
-margin_left = 286.469
-margin_top = 127.786
-margin_right = 1026.47
-margin_bottom = 438.786
+margin_left = 328.0
+margin_top = 141.0
+margin_right = 1068.0
+margin_bottom = 452.0
 rect_min_size = Vector2( 740, 250 )
 script = ExtResource( 1 )
 __meta__ = {
