@@ -98,7 +98,6 @@ func make_maze():
 	
 	unvisited.erase(current)
 	
-	var mapTree = []
 	# Al gore rythm (Recursive backtracker)
 	while unvisited:
 		
@@ -108,7 +107,7 @@ func make_maze():
 		if neighbors.size() > 0: # If there is an unvisited neighbour.
 			var next = neighbors[randi() % neighbors.size()] # Randomly choose one of the potential neighbours.
 			stack.append(current) # Add the current cell to the stack.
-			mapTree.append(current)
+			
 			var dir = next - current # Finds the direction of the selected neighbour.
 			var current_walls = Map.get_cellv(current) - cell_walls[dir] # Makes current_walls equal to the current cell minus the direction AKA the new cell.
 			var next_walls = Map.get_cellv(next) - cell_walls[-dir]
@@ -120,8 +119,8 @@ func make_maze():
 			
 		elif stack:
 			current = stack.pop_back()
-		
-	$Player.tree = mapTree
+		$Player.tree.append(current)
+	
 	#erase_walls()
 	
 func erase_walls():
