@@ -9,4 +9,5 @@ func is_terminal(grid:Array, x, y):
 	
 func _is_terminal_val(v):
 	var based = log(15-v)/log(2)
-	return (int(based) - based)== 0
+	return (int(based) - based) == 0
+
