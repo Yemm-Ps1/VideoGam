@@ -1,18 +1,24 @@
-extends Area2D
+extends Node2D
 
 export var speed = 100
 
-func _process(delta):
+var tree = {}
+var moving = false
+
+#func _ready():
+
+
+#func _process(delta):
+
+
+
+
+
+func continue_signal():
 	var velocity = Vector2()
-	
-	if Input.is_action_pressed("ui_down"):
-		velocity.y += 1
-	 
-	
-	if velocity.length() > 0:
-		velocity = velocity.normalized() * speed
-		$AnimatedSprite.play()
-	else:
-		$AnimatedSprite.stop()
-	
-	position += velocity * delta
+	var i = 0
+	position = Vector2.ZERO
+	var distance = position.distance_to(tree[i])
+	print(distance)
+	if position == tree[i]:
+		i+= 1
