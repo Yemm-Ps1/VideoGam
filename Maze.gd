@@ -30,9 +30,9 @@ var cell_walls = {
 
 
 
-func _process(delta):
-	$Camera2D.position = $Player.position
-
+#func _process(delta):
+	#$Camera2D.position = $Player.position
+ 
 
 func _ready():
 	$Camera2D.zoom = Vector2(1,1)
