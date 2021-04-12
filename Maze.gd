@@ -30,7 +30,8 @@ var cell_walls = {
 
 
 
-
+func _process(delta):
+	$Camera2D.position = $Player.position
 
 
 func _ready():

@@ -4,12 +4,10 @@ var tree = []
 var tile_size = 64
 
 var i = 0
-var dir_enum = {
-	"N": Vector2.UP,
-	"S": Vector2.DOWN,
-	"E": Vector2.RIGHT,
-	"W": Vector2.LEFT
-}
+var inputs = {"ui_right": Vector2.RIGHT,
+			"ui_left": Vector2.LEFT,
+			"ui_up": Vector2.UP,
+			"ui_down": Vector2.DOWN}
 
 
 
@@ -20,59 +18,68 @@ func _ready():
 
 
 func move(dir):
-	position += dir_enum[dir] * tile_size
+	position += inputs[dir] * tile_size
 
 
-var speed = 64
+var speed = 400
 var update = true
+var velocity
 var direction
+
+var dir_enum =  {
+	"N" : Vector2.UP,
+	"S" : Vector2.DOWN,
+	"E" : Vector2.RIGHT,
+	"W" : Vector2.LEFT 
+	
+}
+
+#func _on_Maze_continue_signal():
 func _process(delta):
 #func _on_Maze_continue_signal():
 	if i+1 < tree.size():
 		var grid_pos = (position / tile_size) - Vector2(0.5, 0.5)
 		var current_tree = tree[i]
 		
-		if grid_pos == current_tree:
-			i += 1
+#		if grid_pos == current_tree:
+#			i += 1
 			
 		if update == true:
-			print("HELLO?")
 			direction = grid_pos.direction_to(current_tree)
 			update = false
-
-		if grid_pos == current_tree:
-			i += 1
-		
-		var switch
-		var velocity = direction * speed * delta
+			
+			velocity = direction * speed * delta
+		print(velocity)
 		position += velocity
-		print("GRID: ",grid_pos.y)
-		print("TREE:" ,current_tree.y)
-		
+
+
 		for dir in dir_enum.keys():
 			if direction == dir_enum[dir]:
-
 				match dir:
 					"N":
-						if position.y <= current_tree.y:
-							position.y = current_tree.y
+						if grid_pos.y <= current_tree.y:
+							position = (current_tree + Vector2(0.5, 0.5)) * tile_size
 							update = true
+							i += 1
 					"S":
-						if grid_pos.y >= current_tree.y:
-							grid_pos.y = current_tree.y
+						if grid_pos.y > current_tree.y:
+							position = (current_tree + Vector2(0.5, 0.5)) * tile_size
 							update = true
+							i += 1
 					"E":
 						if grid_pos.x >= current_tree.x:
-							grid_pos.x = current_tree.x
+							position = (current_tree + Vector2(0.5, 0.5)) * tile_size
 							update = true
+							i += 1
 					"W":
 						if grid_pos.x <= current_tree.x:
-							grid_pos.x = current_tree.x
+							position = (current_tree + Vector2(0.5, 0.5)) * tile_size
 							update = true
+							i += 1
 					_:
-						print("what")
+						return
+					
 				
-		
 		
 
 
