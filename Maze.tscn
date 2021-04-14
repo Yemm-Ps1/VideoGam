@@ -23,11 +23,11 @@ current = true
 [node name="Player" type="Area2D" parent="."]
 script = ExtResource( 3 )
 __meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
+"_edit_group_": true
 }
 
 [node name="icon" type="Sprite" parent="Player"]
+scale = Vector2( 7.48304, 7.48304 )
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
