@@ -21,7 +21,7 @@ func move(dir):
 	position += inputs[dir] * tile_size
 
 
-var speed = 8
+var speed = 436
 var update = true
 var velocity
 var direction
@@ -36,63 +36,63 @@ var dir_enum =  {
 
 
 #func _on_Maze_continue_signal():
+#func _process(delta):
+#	var grid_pos = (position / tile_size) - Vector2(0.5, 0.5)
+#	var current_tree = tree[i]#
+#	var direction = grid_pos.direction_to(current_tree)
+#	var velocity = direction*speed
+#
+#	if i+1 <= tree.size():
+#		if grid_pos == current_tree:
+#			i += 1
+#		position += velocity
+
+
 func _process(delta):
-	var grid_pos = (position / tile_size) - Vector2(0.5, 0.5)
-	var current_tree = tree[i]#
-	var direction = grid_pos.direction_to(current_tree)
-	var velocity = direction*speed
-	
-	if i+1 <= tree.size():
-		if grid_pos == current_tree:
-			i += 1
+#func _on_Maze_continue_signal():
+	if i < tree.size():
+		var grid_pos = (position / tile_size) - Vector2(0.5, 0.5)
+		var current_tree = tree[i]
+
+#		if grid_pos == current_tree:
+#			i += 1
+
+		if update == true:
+			direction = grid_pos.direction_to(current_tree)
+			update = false
+
+			velocity = direction * speed * delta
+		print(velocity)
 		position += velocity
 
 
-#func _process(delta):
-##func _on_Maze_continue_signal():
-#	if i+1 < tree.size():
-#		var grid_pos = (position / tile_size) - Vector2(0.5, 0.5)
-#		var current_tree = tree[i]
-#
-##		if grid_pos == current_tree:
-##			i += 1
-#
-#		if update == true:
-#			direction = grid_pos.direction_to(current_tree)
-#			update = false
-#
-#			velocity = direction * speed * delta
-#		print(velocity)
-#		position += velocity
-#
-#
-#		for dir in dir_enum.keys():
-#			if direction == dir_enum[dir]:
-#				match dir:
-#					"N":
-#						if grid_pos.y <= current_tree.y:
-#							position = (current_tree + Vector2(0.5, 0.5)) * tile_size
-#							update = true
-#							i += 1
-#					"S":
-#						if grid_pos.y > current_tree.y:
-#							position = (current_tree + Vector2(0.5, 0.5)) * tile_size
-#							update = true
-#							i += 1
-#					"E":
-#						if grid_pos.x >= current_tree.x:
-#							position = (current_tree + Vector2(0.5, 0.5)) * tile_size
-#							update = true
-#							i += 1
-#					"W":
-#						if grid_pos.x <= current_tree.x:
-#							position = (current_tree + Vector2(0.5, 0.5)) * tile_size
-#							update = true
-#							i += 1
-#					_:
-#						return
-#
-#
-#
+		for dir in dir_enum.keys():
+			if direction == dir_enum[dir]:
+				match dir:
+					"N":
+						if grid_pos.y <= current_tree.y:
+							position = (current_tree + Vector2(0.5, 0.5)) * tile_size
+							update = true
+							i += 1
+					"S":
+						if grid_pos.y > current_tree.y:
+							position = (current_tree + Vector2(0.5, 0.5)) * tile_size
+							update = true
+							i += 1
+					"E":
+						if grid_pos.x >= current_tree.x:
+							position = (current_tree + Vector2(0.5, 0.5)) * tile_size
+							update = true
+							i += 1
+					"W":
+						if grid_pos.x <= current_tree.x:
+							position = (current_tree + Vector2(0.5, 0.5)) * tile_size
+							update = true
+							i += 1
+					_:
+						return
+
+
+
 
 
