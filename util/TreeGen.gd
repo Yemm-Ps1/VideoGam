@@ -6,15 +6,12 @@ const SOUTH_DIVISOR = 4
 const EAST_DIVISOR = 2
 const NORTH_DIVISOR = 1
 
-
-func get_successor_map(input_matrix):
-	pass
 	
-func get_successor_map_from_origin(input_matrix, origin_x, origin_y):
+func get_spanning_tree(input_matrix, start_x, start_y):
 	var current = null
-	var exclusion_cases = {[origin_x, origin_y]:true}
+	var exclusion_cases = {[start_x, start_y]:true}
 	var to_rtn = {}
-	var visiting_queue = [[origin_x, origin_y]]
+	var visiting_queue = [[start_x, start_y]]
 	while !visiting_queue.empty():
 		current = visiting_queue.pop_front()
 		var children = _get_successors_with_exclusions(input_matrix, current[0], current[1], exclusion_cases)

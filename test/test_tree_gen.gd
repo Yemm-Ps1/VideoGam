@@ -1,6 +1,6 @@
 extends "res://addons/gut/test.gd"
 
-var tree_gen = preload("res://TreeGen.gd").new()
+var tree_gen = preload("res://util/TreeGen.gd").new()
 var input_grid = []
 
 func before_all():
@@ -45,12 +45,11 @@ func test_getSuccessors_MiddleExcludeLeftAsDict_shouldContainRight():
 func test_getSuccessors_MiddleBottom_shouldOnlyBeRight():
 	var expected_out= [[2,2]]
 	var found_succ = tree_gen._get_successors(input_grid, 1, 2)
-	gut.p(found_succ)
 	assert_eq(found_succ, expected_out)
 
 func test_getSuccessorMapFromOrigin_fromTopLeft_shouldHaveNineKeys():
 	var expected_key_count = 8 # one is unreachable
-	var found_map = tree_gen.get_successor_map_from_origin(input_grid, 0, 0)
+	var found_map = tree_gen.get_spanning_tree(input_grid, 0, 0)
 	var found_keys = found_map.keys()
 	found_keys.sort()
 	assert_eq(len(found_keys), expected_key_count, "Incorrect key count in: " + str(found_map.keys()))
@@ -58,26 +57,25 @@ func test_getSuccessorMapFromOrigin_fromTopLeft_shouldHaveNineKeys():
 func test_getSuccessorMapFromOrigin_fromTopLeft_shouldHaveTopKey():
 	var expect_to_contain_key = [0, 0]
 	var expect_to_contain_value = [[0, 1]]
-	var found_map = tree_gen.get_successor_map_from_origin(input_grid, 0, 0)
+	var found_map = tree_gen.get_spanning_tree(input_grid, 0, 0)
 	assert_has(found_map, expect_to_contain_key, "Key was missing from return map.")
 
 func test_getSuccessorMapFromOrigin_fromTopLeft_shouldHaveTopLeftSuccessors():
 	var expect_to_contain_key = [0, 0]
 	var expect_to_eq_val = [[0, 1]]
-	var found_map = tree_gen.get_successor_map_from_origin(input_grid, 0, 0)
-	print_map(found_map)
+	var found_map = tree_gen.get_spanning_tree(input_grid, 0, 0)
 	assert_eq(found_map[expect_to_contain_key], expect_to_eq_val, "Values were incorrect in return map.")
 
 
 func test_getSuccessorMapFromOrigin_fromTopLeft_shouldHaveBottomRightSuccessors():
 	var expect_to_contain_key = [2, 2]
 	var expect_to_contain_value = [[1, 2]]
-	var found_map = tree_gen.get_successor_map_from_origin(input_grid, 0, 0)
+	var found_map = tree_gen.get_spanning_tree(input_grid, 0, 0)
 	assert_has(found_map, expect_to_contain_key, "Key was missing from return map.")
 	assert_eq(found_map[expect_to_contain_key], expect_to_contain_value, "Values were incorrect in return map.")
 	
 	
-func print_map(map_to_print):
+func _print_map(map_to_print):
 	for k in map_to_print:
 		gut.p("Key: " + str(k) + ", Values: " + str(map_to_print[k]))
 

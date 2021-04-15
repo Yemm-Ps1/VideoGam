@@ -1,38 +1,46 @@
 extends "res://addons/gut/test.gd"
 
-var grid_util = preload("res://GridUtil.gd").new()
-var input_grid = []
+var grid_util = preload("res://util/GridUtil.gd").new()
+var small_grid = []
+var tiny_empty_grid = []
 
 func before_all():
-	pass
+	small_grid = [[11, 15, 11], [8, 5, 2], [14, 13, 6]]
+	tiny_empty_grid = [[9, 3], [12, 6]]
+	
+	
+func test_isTerminal_smallGridtopRightCorner_shouldBeTrue():
+	assert_true(grid_util.is_terminal(small_grid, 0, 0), "The top right corner was not terminal.")
+	
+func test_isTerminal_smallGridmiddleTile_shouldBeFalse():
+	assert_false(grid_util.is_terminal(small_grid, 1, 1), "The middle title was incorrectly terminal.")
+	
+func test_getTerminals_smallGrid_shouldContainAllTerminals():
+	var expected_terminals = [[0, 0], [0, 2], [1, 2], [2, 0]]
+	var found_terminals = grid_util.get_terminals(small_grid)
+	for t in expected_terminals:
+		assert_has(found_terminals, t)
 
-func before_each():
-	input_grid = [[11, 15, 11], [8, 5, 2], [14, 13, 6]]
-	
-func test_isTerminalVal_numberSeven_shouldReturnTrue():
-	assert_true(grid_util._is_terminal_val(7), "7 was not recognized as terminal.")
+func test_validate_validTinyEmptyGrid_shouldReturnTrue():
+	assert_true(grid_util.validate(tiny_empty_grid))
 
-func test_isTerminalVal_numberEleven_shouldReturnTrue():
-	assert_true(grid_util._is_terminal_val(11), "11 was not recognized as terminal.")
-	
-func test_isTerminalVal_numberThirteen_shouldReturnTrue():
-	assert_true(grid_util._is_terminal_val(13), "13 was not recognized as terminal.")
-	
-func test_isTerminalVal_numberFourteen_shouldReturnTrue():
-	assert_true(grid_util._is_terminal_val(14), "14 was not recognized as terminal.")
+func test_validate_validSmallGrid_shouldReturnTrue():
+	assert_true(grid_util.validate(small_grid))
 
-func test_isTerminalVal_numberSix_shouldReturnFalse():
-	assert_false(grid_util._is_terminal_val(6), "6 was incorrectly recognized as terminal.")
+func test_validate_invalidHorizontalBorderGrid_shouldReturnFalse():
+	var invalid_horizontal_border_grid = [[1, 3], [12, 6]]
+	assert_false(grid_util.validate(invalid_horizontal_border_grid))
 	
-func test_isTerminalVal_numberTen_shouldReturnFalse():
-	assert_false(grid_util._is_terminal_val(10), "10 was incorrectly recognized as terminal.")
-	
-func test_isTerminal_topRightCorner_shouldBeTrue():
-	assert_true(grid_util.is_terminal(input_grid, 0, 0), "The top right corner was not terminal.")
-	
-func test_isTerminal_middleTile_shouldBeFalse():
-	assert_false(grid_util.is_terminal(input_grid, 1, 1), "The middle title was incorrectly terminal.")
-	
+func test_validate_invalidVerticalBorderGrid_shouldReturnFalse():
+	var invalid_vertical_border_grid = [[9, 3], [12, 2]]
+	assert_false(grid_util.validate(invalid_vertical_border_grid))
 
+func test_validate_invalidHorizontalPair_shouldReturnFalse():
+	var invalid_horizontal_pair_grid = [[11, 3], [12, 6]]
+	assert_false(grid_util.validate(invalid_horizontal_pair_grid))
+
+func test_validate_invalidVerticalPair_shouldReturnFalse():
+	var invalid_vertical_pair_grid = [[13, 3], [12, 6]]
+	assert_false(grid_util.validate(invalid_vertical_pair_grid))
 
 	
