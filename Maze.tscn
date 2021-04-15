@@ -11,6 +11,7 @@ erase_fraction = 0
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+limit_smoothed = true
 script = ExtResource( 4 )
 
 [node name="TileMap" type="TileMap" parent="."]

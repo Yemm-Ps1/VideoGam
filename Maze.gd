@@ -5,8 +5,6 @@ const E = 2
 const S = 4
 const W = 8
 
-
-
 onready var Map = $TileMap
 
 export var erase_fraction = 1

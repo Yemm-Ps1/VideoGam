@@ -11,7 +11,7 @@ var update = true
 var velocity
 var direction
 var i = 0
-export var speed = 2
+export var speed = 4
 
 func _process(delta):
 	var player_pos = _translatedPos(position)
@@ -24,8 +24,6 @@ func _process(delta):
 	elif i+1 == tree.size():
 		print("END")
 		return
-	
-	
 	position += velocity
 
 

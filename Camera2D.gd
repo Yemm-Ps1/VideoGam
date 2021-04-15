@@ -1,51 +1,35 @@
 extends Camera2D
 
-
-var dir_enum =  {
-	"ui_up" : Vector2.UP,
-	"ui_down" : Vector2.DOWN,
-	"ui_left" : Vector2.LEFT,
-	"ui_right" : Vector2.RIGHT 
-}
-
 var movement_modifier = 64
 
-func _ready():
-	set_process_input(true)
+var window_size = OS.window_size
+var min_x = 0
+var min_y = 0
+var max_x = window_size.x
+var max_y = window_size.y
 
 
-var _previousPosition = Vector2.ZERO
+#func _ready():
+#	set_process_input(true)
+#	limit_top = 0
+#	limit_bottom = max_y
+#	limit_left = 0
+#	limit_right = max_x
+
+
 var _moveCamera = false
 
 func _unhandled_input(event):
-	for dir in dir_enum.keys():
-		if event.is_action_pressed(dir):
-			move(dir_enum[dir])
-		
 	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
 		get_tree().set_input_as_handled()
 		if event.is_pressed():
-			_previousPosition = event.position
 			_moveCamera = true
 		else:
 			_moveCamera = false
 	elif event is InputEventMouseMotion && _moveCamera:
 		get_tree().set_input_as_handled()
-		position += (_previousPosition - event.position)
-		_previousPosition = event.position
-
-
-#var dragging = false
-#func _input(event):
-#	if event is InputEventMouseButton:
-#		if event.is_pressed():
-#			dragging = true
-#		else:
-#			dragging = false
-#	elif event is InputEventMouseMotion and dragging:
-#		position = get_global_mouse_position()
-
-
-func move(dir):
-	position += dir * movement_modifier
+		var next_pos = position + event.relative * zoom.x * -1
+		position = next_pos
+		print(global_position)
+		#print(position)
 
