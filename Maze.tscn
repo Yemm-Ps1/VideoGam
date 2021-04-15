@@ -1,35 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://road_tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://Maze.gd" type="Script" id=2]
-[ext_resource path="res://Player.gd" type="Script" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 32, 32 )
+[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Camera2D.gd" type="Script" id=4]
 
 [node name="Maze" type="Node2D"]
 script = ExtResource( 2 )
 erase_fraction = 0
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+script = ExtResource( 4 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-
-[node name="Player" type="Area2D" parent="."]
-script = ExtResource( 3 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
-
-[node name="icon" type="Sprite" parent="Player"]
-texture = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource( 1 )
-[connection signal="continue_signal" from="." to="Player" method="_on_Maze_continue_signal"]
+[node name="Player" parent="." instance=ExtResource( 3 )]
