@@ -21,13 +21,11 @@ var _moveCamera = false
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton && event.button_index == BUTTON_LEFT:
-		get_tree().set_input_as_handled()
 		if event.is_pressed():
 			_moveCamera = true
 		else:
 			_moveCamera = false
 	elif event is InputEventMouseMotion && _moveCamera:
-		get_tree().set_input_as_handled()
 		var next_pos = position + event.relative * zoom.x * -1
 		position = next_pos
 		print(global_position)

@@ -7,7 +7,6 @@ const W = 8
 
 onready var Map = $TileMap
 
-export var erase_fraction = 1
 
 var tile_size = 64
 var width = 20
@@ -17,8 +16,8 @@ export var map_seed = 420
 export var zoom = 0.1
 export var DEBUG_CLICK = false
 
-
-
+var tree_gen = preload("res://util/TreeGen.gd").new()
+var grid_util = preload("res://util/GridUtil.gd").new()
 
 signal continue_signal
 
@@ -35,6 +34,7 @@ var cell_walls = {
  
 
 func _ready():
+	
 	$Camera2D.zoom = Vector2(1,1)
 	$Camera2D.position = Map.map_to_world(Vector2(width/2, height/2))
 	#OS.set_window_size(Vector2((width * tile_size), (height * tile_size)))
@@ -87,24 +87,30 @@ func check_neighbors(cell, unvisited): # Cell is the current cell, unvisited is 
 	return list
 
 
+
+var tiles = []
+
 func make_maze():
 	var unvisited = []
 	var stack = []
 	# Fill the map with solid tiles
 	Map.clear()
-	for x in range(width):
-		for y in range (height):
+	for y in range(height):
+		var next_row = []
+		for x in range (width):
+			next_row.append(-1)
 			unvisited.append(Vector2(x,y))
 			Map.set_cellv(Vector2(x,y), N|E|S|W) # Makes all the Cells blank, equal to tile 15
+		tiles.append(next_row)
 	var current = Vector2.ZERO
 	
 	unvisited.erase(current)
 	
+	
 	# Al gore rythm (Recursive backtracker)
 	while unvisited:
 		
-		if(DEBUG_CLICK):
-			yield(self, "continue_signal")
+
 		var neighbors = check_neighbors(current, unvisited) # Gets all unvisited neighbors.
 		if neighbors.size() > 0: # If there is an unvisited neighbour.
 			var next = neighbors[randi() % neighbors.size()] # Randomly choose one of the potential neighbours.
@@ -113,8 +119,12 @@ func make_maze():
 			var dir = next - current # Finds the direction of the selected neighbour.
 			var current_walls = Map.get_cellv(current) - cell_walls[dir] # Makes current_walls equal to the current cell minus the direction AKA the new cell.
 			var next_walls = Map.get_cellv(next) - cell_walls[-dir]
+			
 			Map.set_cellv(current, current_walls)
 			Map.set_cellv(next, next_walls)
+			# TODO: Better way?
+			tiles[current.y][current.x] = current_walls
+			tiles[next.y][next.x] = next_walls
 			current = next
 			unvisited.erase(current)
 			#yield(get_tree(), 'idle_frame')
@@ -122,23 +132,14 @@ func make_maze():
 		elif stack:
 			current = stack.pop_back()
 		$Player.tree.append(current)
-	
-	#erase_walls()
-	
-func erase_walls():
-	for i in range(int(width * height * erase_fraction)):
 		if(DEBUG_CLICK):
 			yield(self, "continue_signal")
-		var x = int(rand_range(1, width-1))
-		var y = int(rand_range(1, height-1))
-		var cell = Vector2(x, y)
-		
-		var neighbor = cell_walls.keys()[randi() % cell_walls.size()]
-		
-		if Map.get_cellv(cell) & cell_walls[neighbor]:
-			var walls = Map.get_cellv(cell) - cell_walls[neighbor]
-			var n_walls = Map.get_cellv(cell + neighbor) - cell_walls[-neighbor]
-			Map.set_cellv(cell, walls)
-			Map.set_cellv(cell + neighbor, n_walls)
-
+	#print(tiles)
+	$Player.grid = tiles
+	#print(tiles)
+	#print(grid_util.validate(tiles))
+	#print(grid_util.is_choice(tiles, 1, 1))
+	var span_tree = tree_gen.get_spanning_tree(tiles, 0, 0)
+	#print(span_tree)
+	#print(span_tree[[1,1]])
 
