@@ -58,7 +58,7 @@ func _process(delta):
 		_set_direction(direction)
 	position += velocity
 
-var rando = 0
+var move = 0
 
 func _translated_tree(tree):
 	print("Heading Towards: ", tree)
@@ -68,8 +68,8 @@ func _translated_tree(tree):
 		print("Choice time")
 		#return Vector2.ZERO
 		randomize()
-		print(rando)
-		return Vector2(tree[rando][0], tree[rando][1])
+		print(move)
+		return Vector2(tree[move][0], tree[move][1])
 
 
 
