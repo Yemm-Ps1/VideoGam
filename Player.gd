@@ -26,17 +26,17 @@ var i = 0
 
 func _unhandled_input(event):
 	if event.is_action_pressed("move_left"):
-		rando = 0
-		print(rando)
+		move = 0
+		print(move)
 	if event.is_action_pressed("move_right"):
-		rando = 1
-		print(rando)
+		move = 1
+		print(move)
 	if event.is_action_pressed("move_up"):
-		rando = 1
-		print(rando)
+		move = 1
+		print(move)
 	if event.is_action_pressed("move_down"):
-		rando = 0
-		print(rando)
+		move = 0
+		print(move)
 
 var span_tree
 
