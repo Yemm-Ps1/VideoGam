@@ -28,20 +28,15 @@ func get_spanning_tree_with_direction(input_matrix, start_x, start_y, unit_dir):
 	# TODO speed-up by avoiding unnecessary branch
 	var spanning_tree: Dictionary = get_spanning_tree(input_matrix, start_x, start_y)
 	var opposite_dir = UnitVectorUtil.opposite(unit_dir)
-	printerr("Opposite dir: " + UnitVectorUtil.convert_to_string(opposite_dir))
 	printerr(input_matrix[start_y][start_x])
 	printerr(str(start_x) + ", "  + str(start_y))
 	if not tile_util.has_wall(input_matrix[start_y][start_x], opposite_dir): 
-		printerr("ERASE THE NEIGHBOUR")
 		var opposite_dir_arr : Array = UnitVectorUtil.get_unit_array(opposite_dir)
 		var to_remove_x = start_x + opposite_dir_arr[0]
 		var to_remove_y = start_y + opposite_dir_arr[1]
 		var successors: Array = spanning_tree[[start_x, start_y]] 
 		successors.erase([to_remove_x, to_remove_y])
-		printerr("ERASING: " + str([to_remove_x, to_remove_y]))
 		var init_succ = spanning_tree[[start_x, start_y]]
-	else:
-		printerr("DONT ERASE THE NEIGHBOUR")
 	return spanning_tree
 		
 func _get_successors(input_matrix, x, y):
