@@ -3,7 +3,7 @@ extends Area2D
 var tree_gen = preload("res://util/TreeGen.gd").new()
 var grid_util = preload("res://util/GridUtil.gd").new()
 
-export var speed = 4
+export var speed = 2
 
 var tree = [Vector2.ZERO]
 var next = Vector2.ZERO
