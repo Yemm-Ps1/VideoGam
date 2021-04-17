@@ -28,8 +28,6 @@ func get_spanning_tree_with_direction(input_matrix, start_x, start_y, unit_dir):
 	# TODO speed-up by avoiding unnecessary branch
 	var spanning_tree: Dictionary = get_spanning_tree(input_matrix, start_x, start_y)
 	var opposite_dir = UnitVectorUtil.opposite(unit_dir)
-	printerr(input_matrix[start_y][start_x])
-	printerr(str(start_x) + ", "  + str(start_y))
 	if not tile_util.has_wall(input_matrix[start_y][start_x], opposite_dir): 
 		var opposite_dir_arr : Array = UnitVectorUtil.get_unit_array(opposite_dir)
 		var to_remove_x = start_x + opposite_dir_arr[0]
