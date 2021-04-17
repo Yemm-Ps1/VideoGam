@@ -1,6 +1,7 @@
 extends "res://addons/gut/test.gd"
 
 var tree_gen = preload("res://util/TreeGen.gd").new()
+const UnitUtil = preload("res://util/UnitVectorUtil.gd")
 var input_grid = []
 
 func before_all():
@@ -47,33 +48,46 @@ func test_getSuccessors_MiddleBottom_shouldOnlyBeRight():
 	var found_succ = tree_gen._get_successors(input_grid, 1, 2)
 	assert_eq(found_succ, expected_out)
 
-func test_getSuccessorMapFromOrigin_fromTopLeft_shouldHaveNineKeys():
+
+
+func test_getSpanningTree_fromTopLeft_shouldHaveNineKeys():
 	var expected_key_count = 8 # one is unreachable
 	var found_map = tree_gen.get_spanning_tree(input_grid, 0, 0)
 	var found_keys = found_map.keys()
 	found_keys.sort()
 	assert_eq(len(found_keys), expected_key_count, "Incorrect key count in: " + str(found_map.keys()))
 
-func test_getSuccessorMapFromOrigin_fromTopLeft_shouldHaveTopKey():
+
+func test_getSpanningTree_fromTopLeft_shouldHaveTopKey():
 	var expect_to_contain_key = [0, 0]
 	var expect_to_contain_value = [[0, 1]]
 	var found_map = tree_gen.get_spanning_tree(input_grid, 0, 0)
 	assert_has(found_map, expect_to_contain_key, "Key was missing from return map.")
 
-func test_getSuccessorMapFromOrigin_fromTopLeft_shouldHaveTopLeftSuccessors():
+func test_getSpanningTree_fromTopLeft_shouldHaveTopLeftSuccessors():
 	var expect_to_contain_key = [0, 0]
 	var expect_to_eq_val = [[0, 1]]
 	var found_map = tree_gen.get_spanning_tree(input_grid, 0, 0)
 	assert_eq(found_map[expect_to_contain_key], expect_to_eq_val, "Values were incorrect in return map.")
 
 
-func test_getSuccessorMapFromOrigin_fromTopLeft_shouldHaveBottomRightSuccessors():
+func test_getSpanningTree_fromTopLeft_shouldHaveBottomRightSuccessors():
 	var expect_to_contain_key = [2, 2]
 	var expect_to_contain_value = [[1, 2]]
 	var found_map = tree_gen.get_spanning_tree(input_grid, 0, 0)
 	assert_has(found_map, expect_to_contain_key, "Key was missing from return map.")
 	assert_eq(found_map[expect_to_contain_key], expect_to_contain_value, "Values were incorrect in return map.")
 	
+
+func test_getSpanningTreeWithDirection_fromMiddlePointingRight_shouldOmmitLeft():
+	var should_contain_key = [2, 2]
+	var should_not_contain_val = [0, 1]
+	var found_map = tree_gen.get_spanning_tree_with_direction(input_grid, 1, 1, UnitUtil.UnitDirection.EAST)
+	var found
+	assert_has(found_map, should_contain_key, "Key was missing from return map.")
+	assert_does_not_have(found_map[should_contain_key], should_not_contain_val, "The key on left of middle should not be in tree")
+	_print_map(found_map)
+
 	
 func _print_map(map_to_print):
 	for k in map_to_print:

@@ -8,13 +8,6 @@ extends Node
 
 var tile_util = preload("res://util/TileUtil.gd").new()
 
-
-const WEST_DIVISOR = 8
-const SOUTH_DIVISOR = 4
-const EAST_DIVISOR = 2
-const NORTH_DIVISOR = 1
-
-
 # ------------------------------------------------------------------------------
 # Gets all nodes which have exactly one entrance/exit i.e. has 3 walls.
 # :returns An array of coordinates of terminal nodes.
@@ -26,6 +19,8 @@ func get_terminals(grid):
 			if is_terminal(grid, x, y):
 				to_rtn.append([x, y])
 	return to_rtn
+
+# TODO node identifiers may be reduntant since tile_util does same thing
 
 # ------------------------------------------------------------------------------
 # NODE IDENTIFIERS 
