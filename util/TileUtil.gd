@@ -36,7 +36,8 @@ func has_top(tile_num):
 func is_terminal(tile_num):
 	var based = log(15-tile_num)/log(2)
 	return (int(based) - based) == 0
-	
+
+
 func is_choice(tile_num):
 	var based = log(tile_num)/log(2)
 	return tile_num == 0 or ((int(based) - based) == 0)

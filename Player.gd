@@ -24,15 +24,25 @@ var i = 0
 	#var span_tree = tree_gen.get_spanning_tree(tiles, 0, 0)
 	#print(span_tree[[1,1]])
 
+func _unhandled_input(event):
+	if event.is_action_pressed("move_left"):
+		rando = 0
+		print(rando)
+	if event.is_action_pressed("move_right"):
+		rando = 1
+		print(rando)
+	if event.is_action_pressed("move_up"):
+		rando = 1
+		print(rando)
+	if event.is_action_pressed("move_down"):
+		rando = 0
+		print(rando)
 
 var span_tree
-
 
 func _ready():
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += Vector2.ONE * tile_size/2
-	
-	
 
 #func _on_Maze_continue_signal():
 func _process(delta):
@@ -47,11 +57,8 @@ func _process(delta):
 		velocity = direction * speed
 		_set_direction(direction)
 	position += velocity
-	
-	randomize()
-	
-	
-var rng = RandomNumberGenerator.new()
+
+var rando = 0
 
 func _translated_tree(tree):
 	print("Heading Towards: ", tree)
@@ -60,11 +67,12 @@ func _translated_tree(tree):
 	else:
 		print("Choice time")
 		#return Vector2.ZERO
-		var rando = rng.randi_range(0,1)
+		randomize()
 		print(rando)
 		return Vector2(tree[rando][0], tree[rando][1])
 
-	
+
+
 	#print(Vector2(span_tree[[0,0]][0][0]))
 #func _process(delta):
 #	var player_pos = _translated_pos(position)

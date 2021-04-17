@@ -109,8 +109,6 @@ func make_maze():
 	
 	# Al gore rythm (Recursive backtracker)
 	while unvisited:
-		
-
 		var neighbors = check_neighbors(current, unvisited) # Gets all unvisited neighbors.
 		if neighbors.size() > 0: # If there is an unvisited neighbour.
 			var next = neighbors[randi() % neighbors.size()] # Randomly choose one of the potential neighbours.
@@ -137,9 +135,9 @@ func make_maze():
 	#print(tiles)
 	$Player.grid = tiles
 	#print(tiles)
-	#print(grid_util.validate(tiles))
+	print(grid_util.validate(tiles))
 	#print(grid_util.is_choice(tiles, 1, 1))
 	var span_tree = tree_gen.get_spanning_tree(tiles, 0, 0)
 	#print(span_tree)
-	#print(span_tree[[1,1]])
+	print(span_tree[[1,1]])
 
