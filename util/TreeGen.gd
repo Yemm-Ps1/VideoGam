@@ -1,6 +1,6 @@
 extends Node
 
-var tile_util = preload("res://util/TileUtil.gd").new()
+const TileUtil = preload("res://util/TileUtil.gd")
 const UnitVectorUtil = preload("res://util/UnitVectorUtil.gd")
 
 const WEST_DIVISOR = 8
@@ -9,7 +9,7 @@ const EAST_DIVISOR = 2
 const NORTH_DIVISOR = 1
 
 	
-func get_spanning_tree(input_matrix, start_x, start_y):
+static func get_spanning_tree(input_matrix, start_x, start_y):
 	
 	var current = null
 	var exclusion_cases = {[start_x, start_y]:true}
@@ -24,11 +24,11 @@ func get_spanning_tree(input_matrix, start_x, start_y):
 			visiting_queue.append(c)
 	return to_rtn
 	
-func get_spanning_tree_with_direction(input_matrix, start_x, start_y, unit_dir):
+static func get_spanning_tree_with_direction(input_matrix, start_x, start_y, unit_dir):
 	# TODO speed-up by avoiding unnecessary branch
 	var spanning_tree: Dictionary = get_spanning_tree(input_matrix, start_x, start_y)
 	var opposite_dir = UnitVectorUtil.opposite(unit_dir)
-	if not tile_util.has_wall(input_matrix[start_y][start_x], opposite_dir): 
+	if not TileUtil.has_wall(input_matrix[start_y][start_x], opposite_dir): 
 		var opposite_dir_arr : Array = UnitVectorUtil.get_unit_array(opposite_dir)
 		var to_remove_x = start_x + opposite_dir_arr[0]
 		var to_remove_y = start_y + opposite_dir_arr[1]
@@ -37,10 +37,10 @@ func get_spanning_tree_with_direction(input_matrix, start_x, start_y, unit_dir):
 		var init_succ = spanning_tree[[start_x, start_y]]
 	return spanning_tree
 		
-func _get_successors(input_matrix, x, y):
+static func _get_successors(input_matrix, x, y):
 	return _get_successors_with_exclusions(input_matrix, x, y, [])
 
-func _get_successors_with_exclusions(input_matrix, x, y, exclusion_cases):
+static func _get_successors_with_exclusions(input_matrix, x, y, exclusion_cases):
 	var remaining = 15 - input_matrix[y][x]
 	var to_rtn = []
 	var next = []
@@ -58,6 +58,6 @@ func _get_successors_with_exclusions(input_matrix, x, y, exclusion_cases):
 		_check_and_add([x, y-1], to_rtn, exclusion_cases)
 	return to_rtn
 	
-func _check_and_add(to_add, add_to, exclusion_cases):
+static func _check_and_add(to_add, add_to, exclusion_cases):
 	if not exclusion_cases.has(to_add):
 		add_to.append(to_add)

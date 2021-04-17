@@ -1,7 +1,7 @@
 extends Node
 
 
-func get_longest_branch(tree: Array, origin_x, origin_y):
+static func get_longest_branch(tree: Array, origin_x, origin_y):
 	var stack = [[origin_x, origin_y]]
 	var current_depth = 0
 	var longest_depth = 0
