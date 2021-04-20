@@ -28,6 +28,5 @@ func _unhandled_input(event):
 	elif event is InputEventMouseMotion && _moveCamera:
 		var next_pos = position + event.relative * zoom.x * -1
 		position = next_pos
-		print(global_position)
 		#print(position)
 
