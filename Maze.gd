@@ -16,10 +16,10 @@ export var map_seed = 420
 export var zoom = 0.1
 export var DEBUG_CLICK = false
 
-var tree_gen = preload("res://util/TreeGen.gd").new()
-var grid_util = preload("res://util/GridUtil.gd").new()
+const TreeGen = preload("res://util/TreeGen.gd")
+const GridUtil = preload("res://util/GridUtil.gd")
 
-signal continue_signal
+signal continue_signal(mouse_event)
 
 var cell_walls = {
 	Vector2.UP : N, Vector2.RIGHT : E,
@@ -47,7 +47,7 @@ func _ready():
 	make_maze()
 
 
-
+var span_tree
 
 
 var scroll_dir = {
@@ -60,7 +60,8 @@ var modifier = 1
 
 func _unhandled_input(event):
 	if event.is_action_pressed("ui_accept"):
-		emit_signal("continue_signal")
+		emit_signal("continue_signal", event)
+		print(Map.world_to_map(event.position))
 	
 	if event.is_action_pressed("modifier"):
 		modifier = 5
@@ -133,11 +134,10 @@ func make_maze():
 		if(DEBUG_CLICK):
 			yield(self, "continue_signal")
 	#print(tiles)
-	$Player.grid = tiles
+	span_tree = TreeGen.get_spanning_tree(tiles, 0, 0)
+	$Player.span_tree = span_tree
 	#print(tiles)
-	print(grid_util.validate(tiles))
-	#print(grid_util.is_choice(tiles, 1, 1))
-	var span_tree = tree_gen.get_spanning_tree(tiles, 0, 0)
+	print(GridUtil.validate(tiles))
+	#print(GridUtil.is_choice(tiles, 1, 1))
 	#print(span_tree)
-	print(span_tree[[1,1]])
 

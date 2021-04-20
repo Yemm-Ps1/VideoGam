@@ -1,13 +1,12 @@
 extends Area2D
 
-var tree_gen = preload("res://util/TreeGen.gd").new()
-var grid_util = preload("res://util/GridUtil.gd").new()
+
+
 
 export var speed = 2
 
 var tree = [Vector2.ZERO]
 var next = Vector2.ZERO
-var grid = []
 
 var tile_size = 64
 
@@ -18,11 +17,6 @@ var velocity = Vector2.ZERO
 var direction
 var i = 0
 
-
-	#print(grid_util.validate(tiles))
-	#print(grid_util.is_choice(tiles, 0, 0))
-	#var span_tree = tree_gen.get_spanning_tree(tiles, 0, 0)
-	#print(span_tree[[1,1]])
 
 func _unhandled_input(event):
 	if event.is_action_pressed("move_left"):
@@ -38,15 +32,18 @@ func _unhandled_input(event):
 		move = 0
 		print(move)
 
-var span_tree
 
 func _ready():
 	position = position.snapped(Vector2.ONE * tile_size)
 	position += Vector2.ONE * tile_size/2
-
+	
 #func _on_Maze_continue_signal():
+
+
+
+var span_tree 
 func _process(delta):
-	span_tree = tree_gen.get_spanning_tree(grid, 0, 0)
+	#span_tree = TreeGen.get_spanning_tree(grid, 0, 0)
 	var pos = _translated_pos()
 	#print(span_tree[[pos.y, pos.x]])
 	
@@ -111,7 +108,10 @@ func _set_direction(dir):
 			rotation_degrees = 270
 			
 
-#func _on_Maze_continue_signal():
+func _on_Maze_continue_signal(event):
+	#print(event.position)
+	pass
+	
 #func _process(delta):
 #	var grid_pos = _translatedPos(position)
 #	var current_tree = tree[i]
