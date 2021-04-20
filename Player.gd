@@ -2,8 +2,9 @@ extends Area2D
 
 
 
-
 export var speed = 2
+
+var AgentClass = preload("res://ai/Agent.gd")
 
 var tree = [Vector2.ZERO]
 var next = Vector2.ZERO

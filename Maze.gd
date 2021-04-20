@@ -18,6 +18,7 @@ export var DEBUG_CLICK = false
 
 const TreeGen = preload("res://util/TreeGen.gd")
 const GridUtil = preload("res://util/GridUtil.gd")
+const Converter = preload("res://util/VectorConverter.gd")
 
 signal continue_signal(mouse_event)
 
@@ -89,7 +90,7 @@ func check_neighbors(cell, unvisited): # Cell is the current cell, unvisited is 
 
 
 
-var tiles = []
+var testDict = {}
 
 func make_maze():
 	var unvisited = []
@@ -97,12 +98,9 @@ func make_maze():
 	# Fill the map with solid tiles
 	Map.clear()
 	for y in range(height):
-		var next_row = []
 		for x in range (width):
-			next_row.append(-1)
 			unvisited.append(Vector2(x,y))
 			Map.set_cellv(Vector2(x,y), N|E|S|W) # Makes all the Cells blank, equal to tile 15
-		tiles.append(next_row)
 	var current = Vector2.ZERO
 	
 	unvisited.erase(current)
@@ -121,9 +119,8 @@ func make_maze():
 			
 			Map.set_cellv(current, current_walls)
 			Map.set_cellv(next, next_walls)
-			# TODO: Better way?
-			tiles[current.y][current.x] = current_walls
-			tiles[next.y][next.x] = next_walls
+			testDict[current] = current_walls
+			testDict[next] = next_walls
 			current = next
 			unvisited.erase(current)
 			#yield(get_tree(), 'idle_frame')
@@ -134,10 +131,13 @@ func make_maze():
 		if(DEBUG_CLICK):
 			yield(self, "continue_signal")
 	#print(tiles)
-	span_tree = TreeGen.get_spanning_tree(tiles, 0, 0)
-	$Player.span_tree = span_tree
+	
+
+	#$Player.span_tree = TreeGen.get_spanning_tree(tiles, 0, 0)
+	var testArray = Converter.dict_to_array(testDict)
+	$Player.span_tree = TreeGen.get_spanning_tree(testArray, 0, 0)
 	#print(tiles)
-	print(GridUtil.validate(tiles))
+	print(GridUtil.validate(testArray))
 	#print(GridUtil.is_choice(tiles, 1, 1))
 	#print(span_tree)
 
