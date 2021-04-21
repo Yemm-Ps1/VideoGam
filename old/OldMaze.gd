@@ -127,7 +127,7 @@ func make_maze():
 			
 		elif stack:
 			current = stack.pop_back()
-		$Player.tree.append(current)
+		$OldPlayer.tree.append(current)
 		if(DEBUG_CLICK):
 			yield(self, "continue_signal")
 	#print(tiles)
@@ -135,7 +135,7 @@ func make_maze():
 
 	#$Player.span_tree = TreeGen.get_spanning_tree(tiles, 0, 0)
 	var testArray = Converter.dict_to_array(testDict)
-	$Player.span_tree = TreeGen.get_spanning_tree(testArray, 0, 0)
+	$OldPlayer.span_tree = TreeGen.get_spanning_tree(testArray, 0, 0)
 	#print(tiles)
 	print(GridUtil.validate(testArray))
 	#print(GridUtil.is_choice(tiles, 1, 1))
