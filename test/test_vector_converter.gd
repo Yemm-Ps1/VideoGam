@@ -10,6 +10,15 @@ const DICT = {
 
 const ARRAY = [[11, 15, 11], [8, 5, 2], [14, 13, 6]]
 
+var tile_map
+var mixed_tile_map
+var rect_tile_map
+
+func before_all():
+	tile_map = Converter.array_to_tilemap(ARRAY)
+	mixed_tile_map = Converter.array_to_tilemap(ARRAY_MIXED)
+	rect_tile_map = Converter.array_to_tilemap(ARRAY_RECT)
+
 const DICT_MIXED = {
 	Vector2(0,1) : 11, Vector2(1,1) : 15,
 	Vector2(0,0) : 8, Vector2(1,0) : 5
@@ -24,13 +33,13 @@ const DICT_RECT = {
 
 const ARRAY_RECT = [[8, 5, 2], [11, 15, 9]]
 
-func test_dictToArray_inputDict_shouldMatchTestArray():
+func test_dictToArray_inputDict_shouldMatchArray():
 	assert_eq(Converter.dict_to_array(DICT), ARRAY)
 
-func test_arrayToDict_inputArray_shouldMatchTestDict():
+func test_arrayToDict_inputArray_shouldMatchDict():
 	assert_eq_shallow(Converter.array_to_dict(ARRAY), DICT)
 
-func test_dictToArray_mixedDict_shouldMatchTestArray():
+func test_dictToArray_mixedDict_shouldMatchMixedArray():
 	assert_eq(Converter.dict_to_array(DICT_MIXED), ARRAY_MIXED)
 
 func test_arrayToDict_mixedArray_shouldMatchMixedDict():
@@ -41,3 +50,12 @@ func test_dictToArray_rectDict_shouldMatchRectArray():
 
 func test_arrayToDict_rectArray_shouldMatchRectDict():
 	assert_eq_shallow(Converter.array_to_dict(ARRAY_RECT), DICT_RECT)
+
+func test_tileMapToArray_tileMap_shouldMatchArray():
+	assert_eq(Converter.tilemap_to_array(tile_map), ARRAY)
+
+func test_tileMapToArray_tileMap_shouldMatchMixedArray():
+	assert_eq(Converter.tilemap_to_array(mixed_tile_map), ARRAY_MIXED)
+
+func test_tileMapToArray_tileMap_shouldMatchRectArray():
+	assert_eq(Converter.tilemap_to_array(rect_tile_map), ARRAY_RECT)

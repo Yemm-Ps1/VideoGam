@@ -11,8 +11,6 @@ var next = Vector2.ZERO
 
 var tile_size = 64
 
-
-
 var update = true
 var velocity = Vector2.ZERO
 var direction
