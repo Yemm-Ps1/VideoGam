@@ -36,7 +36,6 @@ func _follow_path():
 		_set_position(Converter.array_to_vector2(current_path[0]))
 		current_path.remove(0)
 	else:
-		print("here")
 		current_path = test_agent.consume_and_get_next_path()
 		print(current_path)
 
