@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/fonts/pixel_boy_68.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scripts/return_to_title.gd" type="Script" id=2]
+[ext_resource path="res://scenes/Maze.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/Car-Anim-1.png" type="Texture" id=4]
+[ext_resource path="res://scripts/test_agent.gd" type="Script" id=5]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 62, 62 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 4 )
+region = Rect2( 62, 0, 62, 62 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 4 )
+region = Rect2( 124, 0, 62, 62 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 4 )
+region = Rect2( 186, 0, 62, 62 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": true,
+"name": "car",
+"speed": 5.0
+} ]
+
+[node name="Play" type="Control"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -640.0
+margin_right = 640.0
+margin_bottom = 768.0
+rect_scale = Vector2( 1, 1.0037 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Maze" parent="." instance=ExtResource( 3 )]
+
+[node name="TestAgent" type="Node2D" parent="Maze"]
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Animation" type="AnimatedSprite" parent="Maze/TestAgent"]
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 5 )
+animation = "car"
+frame = 2
+playing = true
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -640.0
+margin_right = 640.0
+margin_bottom = 74.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 572.0
+margin_right = 707.0
+margin_bottom = 74.0
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_right = 135.0
+margin_bottom = 74.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+enabled_focus_mode = 0
+text = "Back"
+flat = true
+[connection signal="continue_signal" from="Maze" to="Maze/TestAgent" method="_on_Maze_continue_signal"]
+[connection signal="ready_signal" from="Maze" to="Maze/TestAgent" method="_on_Maze_ready_signal"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]

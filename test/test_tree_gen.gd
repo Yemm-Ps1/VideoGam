@@ -86,7 +86,7 @@ func test_getSpanningTreeWithDirection_fromMiddlePointingRight_shouldOmmitLeft()
 	var found
 	assert_has(found_map, should_contain_key, "Key was missing from return map.")
 	assert_does_not_have(found_map[should_contain_key], should_not_contain_val, "The key on left of middle should not be in tree")
-	_print_map(found_map)
+	#_print_map(found_map)
 
 	
 func _print_map(map_to_print):

@@ -26,8 +26,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Godot3_procgen1_start"
-run/main_scene="res://Maze.tscn"
+config/name="RatGame"
+run/main_scene="res://scenes/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -129,3 +129,4 @@ modifier={
 [rendering]
 
 quality/2d/use_pixel_snap=true
+environment/default_clear_color=Color( 0.796078, 0.858824, 0.988235, 1 )
