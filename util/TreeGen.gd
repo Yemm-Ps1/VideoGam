@@ -10,7 +10,6 @@ const NORTH_DIVISOR = 1
 
 	
 static func get_spanning_tree(input_matrix, start_x, start_y):
-	
 	var current = null
 	var exclusion_cases = {[start_x, start_y]:true}
 	var to_rtn = {}

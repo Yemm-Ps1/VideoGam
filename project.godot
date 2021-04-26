@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "",
+"class": "BotAgent",
+"language": "GDScript",
+"path": "res://ai/BotAgent.gd"
+}, {
+"base": "",
+"class": "PlayerAgent",
+"language": "GDScript",
+"path": "res://ai/PlayerAgent.gd"
+} ]
 _global_script_class_icons={
-
+"BotAgent": "",
+"PlayerAgent": ""
 }
 
 [application]
