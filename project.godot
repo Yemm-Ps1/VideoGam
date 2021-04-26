@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Godot3_procgen1_start"
-run/main_scene="res://Maze.tscn"
+run/main_scene="res://scenes/TitleScreen.tscn"
 config/icon="res://icon.png"
 
 [display]
