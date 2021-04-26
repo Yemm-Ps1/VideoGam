@@ -90,4 +90,3 @@ func test_getInvertedTree_smallTree_shouldFlipEdges():
 		[2, 2]:[[2, 1]]
 	}
 	assert_eq_shallow(found_inverted_tree, inverted_small_tree)
-	

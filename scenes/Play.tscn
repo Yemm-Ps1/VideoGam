@@ -51,7 +51,6 @@ script = ExtResource( 5 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 5 )
 animation = "car"
-frame = 1
 playing = true
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
