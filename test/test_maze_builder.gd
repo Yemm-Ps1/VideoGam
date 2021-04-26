@@ -21,6 +21,7 @@ const ORIGIN_RECT_ARRAY = [[13, 5, 1, 3, 11], [9, 5, 6, 12, 2], [12, 5, 7, 13, 6
 func before_each():
 	Maze.free()
 	Maze = preload("res://util/MazeBuilder.gd").new(Map)
+	Maze.set_seed(420)
 
 func test_makeGrid_smallGrid_shouldMatchSmallArray():
 	var result = Maze.make_grid(SMALL_GRID.x, SMALL_GRID.y).build()
@@ -31,12 +32,12 @@ func test_makeMaze_smallGrid_shouldMatchRandomArray():
 	assert_eq(result, RANDOM_ARRAY)
 
 func test_makeMazeSeed_smallGrid_shouldMatchAlternativeRandomArray():
-	var result = Maze.make_grid(SMALL_GRID.x, SMALL_GRID.y).make_walls(69).build()
+	Maze.set_seed(69)
+	var result = Maze.make_grid(SMALL_GRID.x, SMALL_GRID.y).make_walls().build()
 	assert_eq(result, ALTERNATIVE_RANDOM_ARRAY)
 
 func test_makeMazeCustomOrigin_smallGrid_shouldMatchOriginArray():
-	var result = Maze.make_grid(SMALL_GRID.x, SMALL_GRID.y).make_walls(420, Vector2(1,1)).build()
-	printerr(result)
+	var result = Maze.make_grid(SMALL_GRID.x, SMALL_GRID.y).make_walls(Vector2(1,1)).build()
 	assert_eq(result, ORIGIN_ARRAY)
 
 func test_makeGrid_rectGrid_shouldMatchSmallRectArray():
@@ -48,10 +49,11 @@ func test_makeMaze_rectGrid_shouldMatchRandomRectArray():
 	assert_eq(result, RANDOM_RECT_ARRAY)
 
 func test_makeMazeSeed_rectGrid_shouldMatchAlternativeRandomRectArray():
-	var result = Maze.make_grid(RECT_GRID.x, RECT_GRID.y).make_walls(69).build()
+	Maze.set_seed(69)
+	var result = Maze.make_grid(RECT_GRID.x, RECT_GRID.y).make_walls().build()
 	assert_eq(result, ALTERNATIVE_RANDOM_RECT_ARRAY)
 
 func test_makeMazeCustomOrigin_rectGrid_shouldMatchOriginRectArray():
-	var result = Maze.make_grid(RECT_GRID.x, RECT_GRID.y).make_walls(420, Vector2(2,2)).build()
+	var result = Maze.make_grid(RECT_GRID.x, RECT_GRID.y).make_walls(Vector2(2,2)).build()
 	assert_eq(result, ORIGIN_RECT_ARRAY)
 

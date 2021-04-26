@@ -19,7 +19,8 @@ var origin = Vector2(0,0)
 
 func _ready():
 	var Maze = preload("res://util/MazeBuilder.gd").new(Map)
-	var grid = Maze.make_grid(width, height).make_walls(420, origin).build()
+	Maze.set_seed(420)
+	var grid = Maze.make_grid(width, height).make_walls(origin).build()
 	$TestAgent.tile_map = Map
 	$TestAgent.grid = grid
 	$TestAgent.origin = origin
@@ -33,5 +34,5 @@ func _process(delta):
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
-		print(Map.world_to_map(event.position))
+		#print(Map.world_to_map(event.position))
 		emit_signal("continue_signal")

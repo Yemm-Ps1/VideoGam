@@ -34,17 +34,20 @@ func make_grid(width, height):
 			tile_map.set_cellv(Vector2(x,y), N|E|S|W) # Makes all the Cells blank, equal to tile 15
 	return self
 
+var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
-func make_walls(input_seed = 420, origin = Vector2.ZERO):
-	randomize()
-	seed(input_seed)
+func set_seed(rng_seed):
+	rng.set_seed(rng_seed)
+
+func make_walls(origin = Vector2.ZERO):
+	
 	var stack = []
 	var current = origin
 	unvisited.erase(current)
 	while unvisited:
 		var neighbors = _check_neighbors(current) # Gets all unvisited neighbors.
 		if neighbors.size() > 0: # If there is an unvisited neighbour.
-			var next = neighbors[randi() % neighbors.size()] # Randomly choose one of the potential neighbours.
+			var next = neighbors[rng.randi() % neighbors.size()] # Randomly choose one of the potential neighbours.
 			stack.append(current) # Add the current cell to the stack.
 			var dir = next - current # Finds the direction of the selected neighbour.
 			var current_walls = tile_map.get_cellv(current) - cell_walls[dir] # Makes current_walls equal to the current cell minus the direction AKA the new cell.
