@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Car-Anim-1.png-1d81fcb0a4e21cd1c317510473fb7d7d.stex"
+path="res://.import/MenuLogo.png-481efadc18473e6c941321401f970d05.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Car-Anim-1.png"
-dest_files=[ "res://.import/Car-Anim-1.png-1d81fcb0a4e21cd1c317510473fb7d7d.stex" ]
+source_file="res://assets/MenuLogo.png"
+dest_files=[ "res://.import/MenuLogo.png-481efadc18473e6c941321401f970d05.stex" ]
 
 [params]
 

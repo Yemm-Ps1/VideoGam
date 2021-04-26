@@ -107,9 +107,7 @@ func _set_direction(dir):
 			rotation_degrees = 270
 			
 
-func _on_Maze_continue_signal(event):
-	#print(event.position)
-	pass
+
 	
 #func _process(delta):
 #	var grid_pos = _translatedPos(position)

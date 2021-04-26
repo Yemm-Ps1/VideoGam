@@ -47,3 +47,9 @@ static func tilemap_to_array(tile_map: TileMap):
 	for k in keys:
 		to_rtn[int(k.y)][int(k.x)] = tile_map.get_cell(k.x, k.y)
 	return to_rtn
+
+static func array_to_vector2(arr: Array):
+	return Vector2(arr[0],arr[1])
+
+static func vector2_to_array(vect: Vector2):
+	return [int(vect.x), int(vect.y)]
