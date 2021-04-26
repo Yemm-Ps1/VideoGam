@@ -16,8 +16,7 @@ func before_each():
 func test_nextPath_bigGridfromTopLeftCornerSecondPathWithSeed_shouldBeSeededPath():
 	var agent = BotAgent.new(big_grid)
 	agent.set_origin(0, 0)
-	agent.set_seed(69)
-	var expected_path = [[3, 3], [2, 3], [1, 3], [0, 3]]
+	var expected_path = [[3, 1], [3, 0], [2, 0], [1, 0], [1, 1], [2, 1]]
 	agent.consume_and_get_next_path() # no return call
 	var found_path = agent.consume_and_get_next_path()
 	assert_eq(found_path, expected_path, "Found path was not one of the valid paths.")

@@ -29,7 +29,7 @@ func consume_and_get_next_path():
 	
 	next_path += remaining_path
 	last_path = next_path
-	return next_path
+	return next_path.duplicate()
 	
 func choice(node_list : Array):
 	return node_list[1]

@@ -54,7 +54,6 @@ __meta__ = {
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 5 )
 animation = "car"
-frame = 2
 playing = true
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
