@@ -19,7 +19,6 @@ var origin = Vector2(0,0)
 
 func _ready():
 	var Maze = preload("res://util/MazeBuilder.gd").new(Map)
-	Maze.set_seed(420)
 	var grid = Maze.make_grid(width, height).make_walls(origin).build()
 	$TestAgent.tile_map = Map
 	$TestAgent.grid = grid
