@@ -46,14 +46,16 @@ __meta__ = {
 
 [node name="TestAgent" type="Node2D" parent="Maze"]
 script = ExtResource( 5 )
-speed = 555
+speed = "8"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Maze/TestAgent"]
+position = Vector2( -0.00468254, 6.55651e-06 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 5 )
 animation = "car"
 frame = 3
 playing = true
+offset = Vector2( -0.789683, -0.987356 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_left = 0.5

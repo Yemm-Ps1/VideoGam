@@ -15,16 +15,17 @@ var height = 12
 var origin = Vector2(0,0)
 
 # MAIN
-
+var current_paths
 
 func _ready():
 	var Maze = preload("res://util/MazeBuilder.gd").new(Map)
 	var grid = Maze.make_grid(width, height).make_walls(origin).build()
-	$TestAgent.tile_map = Map
-	$TestAgent.grid = grid
-	$TestAgent.origin = origin
-	emit_signal("ready_signal")
-	
+	var agent_pool = AgentPool.new(grid)
+	agent_pool.add_bots(2)
+	current_paths = agent_pool.update_locale_and_get_paths(0,0)
+
+
+
 func _process(delta):
 	pass
 
