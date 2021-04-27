@@ -30,10 +30,18 @@ func test_nextPath_smallGridfromTopLeftCorner_shouldBeLongestPaths():
 	assert_eq(found_third_path, found_third_path)
 	
 
-func test_nextPath_bigGridfromTopLeftCorner_shouldBeLongestPath():
-	var agent = BotAgent.new(big_grid)
+func test_nextPath_bigGridfromTopLeftCornerBestBot_shouldBeLongestPath():
+	var agent = BotAgent.new(big_grid, 1.0)
 	agent.set_origin(0, 0)
 	var expected_path = [[3, 1], [3, 0], [2, 0], [1, 0], [1, 1], [2, 1]]
+	agent.consume_and_get_next_path() # no return call
+	var found_path = agent.consume_and_get_next_path()
+	assert_eq(found_path, expected_path)
+
+func test_nextPath_bigGridfromTopLeftCornerWorstBot_shouldReturnOtherPath():
+	var agent = BotAgent.new(big_grid, 0.0)
+	agent.set_origin(0, 0)
+	var expected_path = [[3, 3], [2, 3], [1, 3], [0, 3]]
 	agent.consume_and_get_next_path() # no return call
 	var found_path = agent.consume_and_get_next_path()
 	assert_eq(found_path, expected_path)

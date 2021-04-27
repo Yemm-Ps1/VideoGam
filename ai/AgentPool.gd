@@ -20,9 +20,9 @@ func add_player_pool(num_of_humans):
 	# TODO
 	pass
 	
-func add_bots(num_of_bots):
+func add_bots(num_of_bots, prob_of_correct=1.0):
 	for i in range(num_of_bots):
-		var new_instance = BotAgent.new(grid)
+		var new_instance = BotAgent.new(grid, prob_of_correct)
 		new_instance.set_origin(origin_x, origin_y)
 		bot_pool.append(new_instance)
 		locale_pool[[origin_x, origin_y]].append(new_instance)
@@ -32,7 +32,6 @@ func update_locale_and_get_paths(x, y):
 	var last_end_node = [x, y]
 	var agents_at_locale = locale_pool[[x, y]]
 	locale_pool.erase([x, y])
-	printerr("AGENTS AT LOCALE: " + str(agents_at_locale))
 	for ag in agents_at_locale:
 		var next_path : Array = ag.consume_and_get_next_path()
 		var end_node = next_path.back()
