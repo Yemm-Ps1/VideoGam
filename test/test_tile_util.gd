@@ -1,7 +1,7 @@
 extends "res://addons/gut/test.gd"
 
 const TileUtil = preload("res://util/TileUtil.gd")
-const UnitUtil = preload("res://util/UnitVectorUtil.gd")
+const UnitUtil = preload("res://util/UnitUtil.gd")
 var small_grid = []
 
 func before_all():

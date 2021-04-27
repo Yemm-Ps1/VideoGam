@@ -1,6 +1,6 @@
 extends "res://addons/gut/test.gd"
 
-const UnitUtil = preload("res://util/UnitVectorUtil.gd")
+const UnitUtil = preload("res://util/UnitUtil.gd")
 
 func test_getAbsDirection_westCoordinates_shouldBeWestUnitDirection():
 	assert_eq(UnitUtil.get_abs_direction(-1, 0), UnitUtil.UnitDirection.WEST)

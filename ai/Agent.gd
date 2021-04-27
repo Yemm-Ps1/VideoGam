@@ -1,6 +1,6 @@
 extends Node
 
-const UnitUtil = preload("res://util/UnitVectorUtil.gd")
+const UnitUtil = preload("res://util/UnitUtil.gd")
 const TreeUtil = preload("res://util/TreeUtil.gd")
 var TreeGen = preload("res://util/TreeGen.gd").new()
 var spanning_tree = null
@@ -9,6 +9,7 @@ var tile_grid = null
 
 func _init(grid: Array):
 	tile_grid = grid
+
 
 func set_origin(x, y):
 	last_path = [[x, y]]

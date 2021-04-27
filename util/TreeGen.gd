@@ -1,7 +1,7 @@
 extends Node
 
 const TileUtil = preload("res://util/TileUtil.gd")
-const UnitVectorUtil = preload("res://util/UnitVectorUtil.gd")
+const UnitVectorUtil = preload("res://util/UnitUtil.gd")
 
 const WEST_DIVISOR = 8
 const SOUTH_DIVISOR = 4
