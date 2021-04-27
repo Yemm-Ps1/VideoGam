@@ -14,13 +14,14 @@ var cell_walls = {
 }
 
 
-
+var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var tile_map
 
 var unvisited = []
 
 func _init(input_tile_map):
 	tile_map = input_tile_map
+	rng.randomize()
 
 
 func build():
@@ -34,7 +35,7 @@ func make_grid(width, height):
 			tile_map.set_cellv(Vector2(x,y), N|E|S|W) # Makes all the Cells blank, equal to tile 15
 	return self
 
-var rng : RandomNumberGenerator = RandomNumberGenerator.new()
+
 
 func set_seed(rng_seed):
 	rng.set_seed(rng_seed)

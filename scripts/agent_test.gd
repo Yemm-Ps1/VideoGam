@@ -1,6 +1,7 @@
 extends Node2D
 const Converter = preload("res://util/VectorConverter.gd")
-var AgentClass = preload("res://ai/Agent.gd")
+var AgentClass = preload("res://ai/BotAgent.gd")
+
 var test_agent
 var tile_map
 var grid
@@ -26,7 +27,7 @@ func _on_Maze_continue_signal():
 	_follow_path()
 
 func _process(delta):
-	pass
+	_follow_path()
 
 func _set_position(pos = Converter.array_to_vector2(current_path[0])):
 	print("test")
@@ -36,10 +37,11 @@ func _get_position():
 	return tile_map.world_to_map(position)
 
 
-
 func _follow_path():
-	if(!current_path):
+	if !current_path:
 		current_path = test_agent.consume_and_get_next_path().duplicate() # TODO REMOVE		
+		if !current_path:
+			return
 	_set_direction()
 	_set_position()
 	current_path.pop_front()
