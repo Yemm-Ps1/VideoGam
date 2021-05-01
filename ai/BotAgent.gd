@@ -8,7 +8,8 @@ var prob_of_correct = -1
 
 func _init(grid, prob_of_correct=1).(grid):
 	self.prob_of_correct = prob_of_correct
-	
+
+
 func set_seed(rng_seed):
 	rng.set_seed(rng_seed)
 	

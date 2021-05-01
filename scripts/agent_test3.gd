@@ -20,7 +20,7 @@ func _ready():
 
 func _on_Maze_ready_signal():
 
-	test_agent = AgentClass.new(grid, 0.8)
+	test_agent = AgentClass.new(grid, 1)
 	test_agent.set_origin(origin.x, origin.y)
 	current_path = test_agent.consume_and_get_next_path()
 	_update_target_pos()
@@ -54,7 +54,7 @@ func _update_target_pos():
 
 func _get_position():
 	return tile_map.world_to_map(position)
-	
+
 
 
 func _follow_path():
@@ -66,7 +66,6 @@ func _follow_path():
 	_update_target_pos()
 	_update_direction()
 	current_path.pop_front()
-	
 	
 
 	

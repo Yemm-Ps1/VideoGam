@@ -2,6 +2,9 @@ extends "res://addons/gut/test.gd"
 
 const Converter = preload("res://util/VectorConverter.gd")
 
+
+
+
 const DICT = {
 	Vector2(0,0) : 11, Vector2(1,0) : 15, Vector2(2,0) : 11,
 	Vector2(0,1) : 8, Vector2(1,1) : 5, Vector2(2,1) : 2,

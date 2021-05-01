@@ -2,7 +2,7 @@ extends Area2D
 
 
 
-export var speed = 2
+export var speed = 8
 
 var AgentClass = preload("res://ai/Agent.gd")
 

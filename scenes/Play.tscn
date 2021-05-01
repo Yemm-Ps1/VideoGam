@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://assets/fonts/pixel_boy_68.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scripts/return_to_title.gd" type="Script" id=2]
 [ext_resource path="res://scenes/Maze.tscn" type="PackedScene" id=3]
-[ext_resource path="res://assets/Car-Anim-1.png" type="Texture" id=4]
+[ext_resource path="res://assets/F1-Anim-1.png" type="Texture" id=4]
 [ext_resource path="res://scripts/agent_test2.gd" type="Script" id=5]
+[ext_resource path="res://scripts/agent_test3.gd" type="Script" id=6]
+[ext_resource path="res://assets/Car-Anim-1.png" type="Texture" id=7]
+[ext_resource path="res://assets/Rat_2.png" type="Texture" id=8]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 4 )
@@ -30,6 +33,30 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 7 )
+region = Rect2( 0, 0, 62, 62 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 7 )
+region = Rect2( 62, 0, 62, 62 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 7 )
+region = Rect2( 124, 0, 62, 62 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 7 )
+region = Rect2( 186, 0, 62, 62 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "car",
+"speed": 5.0
+} ]
+
 [node name="Play" type="Control"]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -45,17 +72,44 @@ __meta__ = {
 [node name="Maze" parent="." instance=ExtResource( 3 )]
 
 [node name="TestAgent" type="Node2D" parent="Maze"]
-script = ExtResource( 5 )
-speed = "8"
+script = ExtResource( 6 )
+speed = "4"
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Maze/TestAgent"]
-position = Vector2( -0.00468254, 6.55651e-06 )
+position = Vector2( -0.672102, -10.3069 )
 scale = Vector2( 1.5, 1.5 )
 frames = SubResource( 5 )
 animation = "car"
-frame = 3
+frame = 2
 playing = true
 offset = Vector2( -0.789683, -0.987356 )
+
+[node name="Rat" type="Sprite" parent="Maze/TestAgent"]
+visible = false
+position = Vector2( -0.221904, 4.89994 )
+rotation = -1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+
+[node name="TestAgent2" type="Node2D" parent="Maze"]
+script = ExtResource( 5 )
+speed = "4"
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="Maze/TestAgent2"]
+position = Vector2( -0.00468254, 9.30944 )
+scale = Vector2( 1.5, 1.5 )
+frames = SubResource( 10 )
+animation = "car"
+playing = true
+offset = Vector2( -0.789683, -0.987356 )
+
+[node name="Rat" type="Sprite" parent="Maze/TestAgent2"]
+visible = false
+position = Vector2( -3.59914, -3.89768 )
+rotation = -1.5708
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 8 )
+offset = Vector2( 0, 6.97637 )
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 anchor_left = 0.5
@@ -81,6 +135,8 @@ custom_colors/font_color = Color( 0, 0, 0, 1 )
 enabled_focus_mode = 0
 text = "Back"
 flat = true
+[connection signal="continue_signal" from="Maze" to="Maze/TestAgent2" method="_on_Maze_continue_signal"]
 [connection signal="continue_signal" from="Maze" to="Maze/TestAgent" method="_on_Maze_continue_signal"]
+[connection signal="ready_signal" from="Maze" to="Maze/TestAgent2" method="_on_Maze_ready_signal"]
 [connection signal="ready_signal" from="Maze" to="Maze/TestAgent" method="_on_Maze_ready_signal"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_Button_pressed"]

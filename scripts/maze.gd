@@ -23,6 +23,9 @@ func _ready():
 	$TestAgent.tile_map = Map
 	$TestAgent.grid = grid
 	$TestAgent.origin = origin
+	$TestAgent2.tile_map = Map
+	$TestAgent2.grid = grid
+	$TestAgent2.origin = origin
 	emit_signal("ready_signal")
 	
 func _process(delta):

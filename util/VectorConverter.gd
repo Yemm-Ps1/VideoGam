@@ -15,7 +15,6 @@ static func dict_to_array(inputDict: Dictionary):
 		to_rtn[int(k.y)][int(k.x)] = inputDict[k]
 	return to_rtn
 
-
 static func array_to_dict(arr: Array):
 	var to_rtn = {}
 	var width = len(arr[0])
@@ -33,20 +32,20 @@ static func array_to_tilemap(arr: Array):
 	return to_rtn
 
 static func tilemap_to_array(tile_map: TileMap):
-	var to_rtn = []
-	var keys = tile_map.get_used_cells()
-	var first = keys[0]
-	var last = keys[-1]
-	var width = last.x - first.x + 1
-	var height = last.y - first.y + 1
-	for y in range(height):
-		var row = []
-		for x in range(width):
-			row.append(-1)
-		to_rtn.append(row)
-	for k in keys:
-		to_rtn[int(k.y)][int(k.x)] = tile_map.get_cell(k.x, k.y)
-	return to_rtn
+		var to_rtn = []
+		var keys = tile_map.get_used_cells()
+		var first = keys[0]
+		var last = keys[-1]
+		var width = last.x - first.x + 1
+		var height = last.y - first.y + 1
+		for y in range(height):
+			var row = []
+			for x in range(width):
+				row.append(-1)
+			to_rtn.append(row)
+		for k in keys:
+			to_rtn[int(k.y)][int(k.x)] = tile_map.get_cell(k.x, k.y)
+		return to_rtn
 
 static func array_to_vector2(arr: Array):
 	return Vector2(arr[0],arr[1])
