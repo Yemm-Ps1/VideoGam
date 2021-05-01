@@ -6,7 +6,7 @@
 ################################################################################
 extends Node
 
-const UnitUtil = preload("res://util/UnitVectorUtil.gd")
+const UnitUtil = preload("res://util/UnitUtil.gd")
 
 
 # TODO replace with Unit util call?

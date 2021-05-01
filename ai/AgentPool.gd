@@ -1,10 +1,11 @@
 extends Node
 
 var BotAgent = preload("res://ai/BotAgent.gd")
-
+var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 var grid = null
 var bot_pool : Array = []
+var player_pool: Array = []
 var locale_pool : Dictionary = {}
 var path_pool = {}
 var origin_x
@@ -15,14 +16,18 @@ func _init(grid: Array, origin_x=0, origin_y=0):
 	self.origin_x = origin_y
 	self.origin_y = origin_y
 	locale_pool = {[origin_x, origin_y]: []}
+	
+func set_seed(rng_seed):
+	rng.set_seed(rng_seed)
 
 func add_player_pool(num_of_humans):
 	# TODO
 	pass
 	
-func add_bots(num_of_bots, prob_of_correct=1.0):
+func add_bots(num_of_bots, skill_mean=1.0, skill_deviaion=0.0):
 	for i in range(num_of_bots):
-		var new_instance = BotAgent.new(grid, prob_of_correct)
+		var skill_level = rng.randfn(skill_mean, skill_deviaion) # normally distributed
+		var new_instance = BotAgent.new(grid, skill_mean)
 		new_instance.set_origin(origin_x, origin_y)
 		bot_pool.append(new_instance)
 		locale_pool[[origin_x, origin_y]].append(new_instance)

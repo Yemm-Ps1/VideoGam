@@ -1,7 +1,7 @@
 extends "res://addons/gut/test.gd"
 
 const TreeGen = preload("res://util/TreeGen.gd")
-const UnitUtil = preload("res://util/UnitVectorUtil.gd")
+const UnitUtil = preload("res://util/UnitUtil.gd")
 var input_grid = []
 
 func before_all():
