@@ -6,9 +6,14 @@ var TreeGen = preload("res://util/TreeGen.gd").new()
 var spanning_tree = null
 var last_path = null
 var tile_grid = null
+var agent_name
 
-func _init(grid: Array):
+func _init(grid: Array, agent_name=null):
 	tile_grid = grid
+	if not agent_name:
+		self.agent_name = _get_default_agent_name()
+	else:
+		self.agent_name = agent_name
 
 
 func set_origin(x, y):
@@ -35,4 +40,10 @@ func consume_and_get_next_path():
 func choice(node_list : Array):
 	return node_list[1]
 	# TODO build functionality
+	
+func get_agent_name():
+	return agent_name
+	
+func _get_default_agent_name():
+	return str(self).replace("[Node", "Agent").replace("]", "")
 

@@ -19,6 +19,32 @@ func test_addAndGetBots_twentyBots_shouldHaveTwentyBots():
 	
 	for obj in found_pool:
 		assert_true(typeof(obj) == typeof(BotAgent), "Non-bot agent found in pool.")
+		
+func test_addAndGetPlayers_twentyPlayers_shouldHaveTwentyPlayers():
+	var expected_pool_size = 20
+	var agent_pool = AgentPool.new(tiny_grid)
+	agent_pool.add_players(20)
+	var found_pool = agent_pool.get_player_pool()
+	
+	var pool_size = len(found_pool)
+	
+	assert_eq(pool_size, expected_pool_size, "Incorrect pool size")
+	
+	for obj in found_pool:
+		assert_true(typeof(obj) == typeof(PlayerAgent), "Non-player agent found in pool.")
+		
+func test_addAndGetAgents_tenPlayersTenBots_shouldHaveTenOfEach():
+	var expected_pool_size = 20
+	var agent_pool = AgentPool.new(tiny_grid)
+	agent_pool.add_players(10)
+	agent_pool.add_bots(10)
+	
+	var found_pool = agent_pool.get_total_pool()
+	var pool_size = len(found_pool)
+	
+	assert_eq(pool_size, expected_pool_size, "Incorrect pool size")
+		
+
 	
 func test_andAndUpdate_shouldHaveBotsAtExpectedInitLocale():
 	var test_pool_size = 5

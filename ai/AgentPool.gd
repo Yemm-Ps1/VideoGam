@@ -20,10 +20,13 @@ func _init(grid: Array, origin_x=0, origin_y=0):
 func set_seed(rng_seed):
 	rng.set_seed(rng_seed)
 
-func add_player_pool(num_of_humans):
-	# TODO
-	pass
-	
+func add_players(num_of_humans, names=null):
+	for i in range(num_of_humans):
+		var new_instance = PlayerAgent.new(grid)
+		new_instance.set_origin(origin_x, origin_y)
+		player_pool.append(new_instance)
+		locale_pool[[origin_x, origin_y]].append(new_instance)
+		
 func add_bots(num_of_bots, skill_mean=1.0, skill_deviaion=0.0):
 	for i in range(num_of_bots):
 		var skill_level = rng.randfn(skill_mean, skill_deviaion) # normally distributed
@@ -53,5 +56,8 @@ func get_bots_by_locale(x, y):
 func get_bot_pool():
 	return bot_pool
 	
+func get_player_pool():
+	return player_pool
+	
 func get_total_pool():
-	return bot_pool # TODO add additionals
+	return bot_pool + player_pool
