@@ -1,6 +1,5 @@
 extends Node
 
-const TileUtil = preload("res://util/TileUtil.gd")
 const UnitVectorUtil = preload("res://util/UnitUtil.gd")
 
 const WEST_DIVISOR = 8
@@ -27,7 +26,7 @@ static func get_spanning_tree_with_direction(input_matrix, start_x, start_y, uni
 	# TODO speed-up by avoiding unnecessary branch
 	var spanning_tree: Dictionary = get_spanning_tree(input_matrix, start_x, start_y)
 	var opposite_dir = UnitVectorUtil.opposite(unit_dir)
-	if not TileUtil.has_wall(input_matrix[start_y][start_x], opposite_dir): 
+	if not UnitVectorUtil.is_valid_at_tile(input_matrix[start_y][start_x], opposite_dir): 
 		var opposite_dir_arr : Array = UnitVectorUtil.get_unit_array(opposite_dir)
 		var to_remove_x = start_x + opposite_dir_arr[0]
 		var to_remove_y = start_y + opposite_dir_arr[1]

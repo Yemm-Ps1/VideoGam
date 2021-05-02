@@ -49,20 +49,20 @@ func test_hasTop_numberZero_shouldBeFalse():
 	assert_false(TileUtil.has_top(0))
 	
 	
-func test_hasWall_eightWest_shouldBeTrue():
-	assert_true(TileUtil.has_wall(8, UnitUtil.UnitDirection.WEST))
-	
-func test_hasWall_twelveSouth_shouldBeTrue():
-	assert_true(TileUtil.has_wall(12, UnitUtil.UnitDirection.SOUTH))
-	
-func test_hasWall_fiveWest_shouldBeFalse():
-	assert_false(TileUtil.has_wall(5, UnitUtil.UnitDirection.WEST))
-	
-func test_hasWall_nineEast_shouldBeFalse():
-	assert_false(TileUtil.has_wall(9, UnitUtil.UnitDirection.EAST))
-	
-func test_hasWall_zeroNorth_shouldBeFalse():
-	assert_false(TileUtil.has_wall(0, UnitUtil.UnitDirection.NORTH))
+#func test_hasWall_eightWest_shouldBeTrue():
+#	assert_true(TileUtil.has_wall(8, UnitUtil.UnitDirection.WEST))
+#
+#func test_hasWall_twelveSouth_shouldBeTrue():
+#	assert_true(TileUtil.has_wall(12, UnitUtil.UnitDirection.SOUTH))
+#
+#func test_hasWall_fiveWest_shouldBeFalse():
+#	assert_false(TileUtil.has_wall(5, UnitUtil.UnitDirection.WEST))
+#
+#func test_hasWall_nineEast_shouldBeFalse():
+#	assert_false(TileUtil.has_wall(9, UnitUtil.UnitDirection.EAST))
+#
+#func test_hasWall_zeroNorth_shouldBeFalse():
+#	assert_false(TileUtil.has_wall(0, UnitUtil.UnitDirection.NORTH))
 	
 # ------------------------------------------------------------------------------
 # tile INDENTIFIER TESTS

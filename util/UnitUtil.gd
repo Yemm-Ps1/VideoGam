@@ -84,6 +84,18 @@ static func get_absolute_from_relative(unit_dir_one, unit_dir_two):
 	var as_num_two = _get_relative_north_value(unit_dir_two)
 	var result_rel_north = (as_num_one + as_num_two) % 4
 	return _get_from_relative_north_values(result_rel_north)
+	
+static func is_valid_at_tile(tile_num, unit_direction):
+	match(unit_direction):
+		UnitDirection.WEST:
+			return TileUtil.has_left(tile_num)
+		UnitDirection.SOUTH:
+			return TileUtil.has_bottom(tile_num)	
+		UnitDirection.EAST:
+			return TileUtil.has_right(tile_num)
+		UnitDirection.NORTH:
+			return TileUtil.has_top(tile_num)
+	return null
 
 static func _get_relative_north_value(unit_direction):
 	match(unit_direction):

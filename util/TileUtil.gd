@@ -6,8 +6,6 @@
 ################################################################################
 extends Node
 
-const UnitUtil = preload("res://util/UnitUtil.gd")
-
 
 # TODO replace with Unit util call?
 const WEST_DIVISOR = 8
@@ -32,19 +30,6 @@ static func has_right(tile_num):
 	
 static func has_top(tile_num):
 	return _check_against_greater_divisors(tile_num, NORTH_DIVISOR)
-
-static func has_wall(tile_num, unit_direction):
-	match(unit_direction):
-		UnitUtil.UnitDirection.WEST:
-			return has_left(tile_num)
-		UnitUtil.UnitDirection.SOUTH:
-			return has_bottom(tile_num)	
-		UnitUtil.UnitDirection.EAST:
-			return has_right(tile_num)
-		UnitUtil.UnitDirection.NORTH:
-			return has_top(tile_num)
-	return null
-	
 
 # ------------------------------------------------------------------------------
 # NODE IDENTIFIERS
