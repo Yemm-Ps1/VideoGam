@@ -68,3 +68,59 @@ func test_opposite_eastUnit_shouldReturnWest():
 	
 func test_opposite_northUnit_shouldReturnSouth():
 	assert_eq(UnitUtil.opposite(UnitUtil.UnitDirection.NORTH), UnitUtil.UnitDirection.SOUTH)
+
+
+func test_getAbsoluteFromRelative_allDirectionsWithNorth_shouldReturnSameValue():
+	var north = UnitUtil.UnitDirection.NORTH
+	var others = 	[UnitUtil.UnitDirection.NORTH, 
+					UnitUtil.UnitDirection.EAST, 
+					UnitUtil.UnitDirection.SOUTH, 
+					UnitUtil.UnitDirection.WEST]
+	for other in others:
+		var found = UnitUtil.get_absolute_from_relative(north, other)
+		assert_eq(found, other)
+		
+func test_getAbsoluteFromRelative_allDirectionsWithEast_shouldReturnClockwiseByNinety():
+	var east = UnitUtil.UnitDirection.EAST
+	var others = 	[UnitUtil.UnitDirection.NORTH, 
+					UnitUtil.UnitDirection.EAST, 
+					UnitUtil.UnitDirection.SOUTH, 
+					UnitUtil.UnitDirection.WEST]
+	var expected = [UnitUtil.UnitDirection.EAST, 
+					UnitUtil.UnitDirection.SOUTH, 
+					UnitUtil.UnitDirection.WEST, 
+					UnitUtil.UnitDirection.NORTH]
+	for i in range(4):
+		var other = others[i]
+		var found = UnitUtil.get_absolute_from_relative(east, other)
+		assert_eq(found, expected[i])
+		
+func test_getAbsoluteFromRelative_allDirectionsWithSouth_shouldReturnByOneEighty():
+	var south = UnitUtil.UnitDirection.SOUTH
+	var others = 	[UnitUtil.UnitDirection.NORTH, 
+					UnitUtil.UnitDirection.EAST, 
+					UnitUtil.UnitDirection.SOUTH, 
+					UnitUtil.UnitDirection.WEST]
+	var expected = [UnitUtil.UnitDirection.SOUTH, 
+					UnitUtil.UnitDirection.WEST, 
+					UnitUtil.UnitDirection.NORTH, 
+					UnitUtil.UnitDirection.EAST]
+	for i in range(4):
+		var other = others[i]
+		var found = UnitUtil.get_absolute_from_relative(south, other)
+		assert_eq(found, expected[i])
+		
+func test_getAbsoluteFromRelative_allDirectionsWithWest_shouldReturnAntiClockwiseByNinety():
+	var east = UnitUtil.UnitDirection.WEST
+	var others = 	[UnitUtil.UnitDirection.NORTH, 
+					UnitUtil.UnitDirection.EAST, 
+					UnitUtil.UnitDirection.SOUTH, 
+					UnitUtil.UnitDirection.WEST]
+	var expected = [UnitUtil.UnitDirection.WEST, 
+					UnitUtil.UnitDirection.NORTH, 
+					UnitUtil.UnitDirection.EAST, 
+					UnitUtil.UnitDirection.SOUTH]
+	for i in range(4):
+		var other = others[i]
+		var found = UnitUtil.get_absolute_from_relative(east, other)
+		assert_eq(found, expected[i])

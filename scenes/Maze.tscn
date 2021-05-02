@@ -10,3 +10,4 @@ script = ExtResource( 1 )
 tile_set = ExtResource( 2 )
 cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 format = 1
+tile_data = PoolIntArray( 327685, 0, 0 )

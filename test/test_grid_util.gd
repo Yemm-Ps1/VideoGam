@@ -20,6 +20,12 @@ func test_getTerminals_smallGrid_shouldContainAllTerminals():
 	var found_terminals = GridUtil.get_terminals(small_grid)
 	for t in expected_terminals:
 		assert_has(found_terminals, t)
+		
+func test_getChoices_smallGrid_shouldReturnAllChoices():
+	var expected_choices = [[0, 1], [2, 1]]
+	var found_choices = GridUtil.get_choices(small_grid)
+	for c in expected_choices:
+		assert_has(found_choices, c)
 
 func test_validate_validTinyEmptyGrid_shouldReturnTrue():
 	assert_true(GridUtil.validate(tiny_empty_grid))

@@ -20,6 +20,19 @@ static func get_terminals(grid):
 				to_rtn.append([x, y])
 	return to_rtn
 
+# ------------------------------------------------------------------------------
+# Gets all nodes which have three or more entrance/exit i.e. has 1 or less walls.
+# :returns An array of coordinates of terminal nodes.
+# ------------------------------------------------------------------------------
+static func get_choices(grid: Array):
+	var choices = []
+	for y in range(len(grid)):
+		for x in range(len(grid[0])):
+			printerr(str(x) + ", " + str(y))
+			if is_choice(grid, x, y):
+				choices.append([x, y])
+	return choices
+
 # TODO node identifiers may be reduntant since TileUtil does same thing
 
 # ------------------------------------------------------------------------------

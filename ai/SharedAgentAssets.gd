@@ -6,7 +6,6 @@ var path_value_table: Array
 
 func _init(tile_grid: Array):
 	self.tile_grid = tile_grid
-	
 	_generate_path_value_table()
 
 func _generate_path_value_table():
